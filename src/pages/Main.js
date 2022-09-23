@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Feed from '../components/Feed';
 import Popup from "../components/Popup";
 import LoginForm from "../components/LoginForm";
+import './Main.css'
 
 
 function Main(props) {
@@ -17,7 +18,7 @@ function Main(props) {
     return (
         <div className="main">
             <div className="main-wrapper">
-                <Feed />
+                <Feed/>
                 <Popup trigger={showPopup} setTrigger={setShowPopup} >
                     <LoginForm setShowPopup={setShowPopup} setLoginGate={props.setLoginGate} />
                 </Popup>

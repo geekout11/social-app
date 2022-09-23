@@ -23,7 +23,7 @@ function NavBar(props) {
             <h2 onClick={() => navigate('/')}>SocialApp</h2>
             <div className="navbar-wrapper">
                 <ul>
-                    <li onClick={() => navigate('/')} className="navbar-icon-item" to={'/'}>
+                    <li onClick={() => navigate('home')} className="navbar-icon-item" to={'home'}>
                         Home
                     </li>
                     {props.loginGate || (

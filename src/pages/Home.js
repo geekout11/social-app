@@ -4,25 +4,21 @@ import Sidebar from '../components/Sidebar';
 import Feed from '../components/Feed';
 import Popup from "../components/Popup";
 import LoginForm from "../components/LoginForm";
+import Share from "../components/Share";
 
 
 function Home(props) {
 
-    const [showPopup, setShowPopup] = useState(false);
-
-    useEffect(() => {
-        setTimeout(() => {
-            setShowPopup(true);
-        }, 1000)
-    }, [])
-
     return (
         <>
             <div className="home-container">
-                <Feed />
+                <div className="posts">
+                    <Share className="share" />
+                    <Feed />
+                </div>
                 <Sidebar />
-                <Popup trigger={showPopup} setTrigger={setShowPopup} >
-                    <LoginForm setShowPopup={setShowPopup} setLoginGate={props.setLoginGate} />
+                <Popup trigger={props.showPopup} setTrigger={props.setShowPopup} >
+                    <LoginForm setLoginGate={props.setLoginGate} setShowPopup={props.setShowPopup} />
                 </Popup>
             </div>
         </>

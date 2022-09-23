@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { checkPassword, removeWhiteSpaces } from '../data/Tools';
 import { API } from '../data/Api';
 import { WRONG_PASS_MSG, DIFF_PASS_MSG, SHOW_MSG_TIME } from '../data/Config';
-import InfoBox from '../data/InfoBox';
+import Notifications from '../data/Notifications';
 
 function Register() {
   const [inputData, setInputData] = useState({
@@ -64,7 +64,7 @@ function Register() {
 
     setTimeout(() => {
       setMsg('');
-      if (res.data.signedup) navi('/login');
+      if (res.data.signedup) navi('/login')
     }, SHOW_MSG_TIME);
   };
 
@@ -82,7 +82,7 @@ function Register() {
               <input type="password" name="pass" placeholder="Password" className="register-input" onChange={controlData} required />
               <input type="password" name="passControl" placeholder="Confirm password" className="register-input" onChange={controlData} required />
               <button type="submit" className="register-button">Register</button>
-              {msg && <InfoBox msg={msg} />}
+              {msg && <Notifications msg={msg} />}
             </div>
           </form>
         </div>

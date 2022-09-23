@@ -4,6 +4,14 @@
     justify-content: center;
 }
 
+.posts {
+    display: block;
+}
+
+.posts .share {
+    margin-top: 20px;
+}
+
 hr {
     border: 1px solid #eef0f1;
 }

@@ -1,18 +1,21 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import InfoBox from '../data/InfoBox';
+import Notifications from '../data/Notifications';
 import { API } from '../data/Api';
 import { SHOW_MSG_TIME } from '../data/Config';
 
-
 function LoginForm(props) {
+
 
     const [inputData, setInputData] = useState({
         login: '',
         pass: '',
     });
-    const [msg, setMsg] = useState('');
-    const navi = useNavigate();
+
+    const [successMsg, setSuccessMsg] = useState('');
+    const [errorMsg, setErrorMsg] = useState('');
+
+    const navigate = useNavigate();
 
     const controlData = (e) => {
         setInputData({
@@ -35,16 +38,20 @@ function LoginForm(props) {
     const handleAPIAnswer = (res) => {
         console.log(res);
         if (res.data.error || res.status !== 200) {
-            setMsg('Wrong login or password');
-            setTimeout(() => setMsg(''), SHOW_MSG_TIME);
+            setErrorMsg('Wrong login or password');
+            setTimeout(() => setErrorMsg(''), SHOW_MSG_TIME);
         } else {
+            setSuccessMsg('Successfully logged in');
+            setTimeout(() => setSuccessMsg(''), SHOW_MSG_TIME);
+            
             const { username, jwt_token: jwtToken } = res.data;
             localStorage.setItem(
                 'myLocalStorage',
                 JSON.stringify({ username, jwtToken })
             );
             props.setLoginGate(true);
-            navi('/');
+            navigate('/home');
+            props.setShowPopup(false);
         }
     };
 
@@ -54,11 +61,12 @@ function LoginForm(props) {
                 <div className="login-box">
                     <input type="text" name="login" placeholder="Username" className="login-input" onChange={controlData} required />
                     <input type="password" name="pass" placeholder="Password" className="login-input" onChange={controlData} required />
-                    <button type="submit" className="login-button" onClick={() => props.setShowPopup(false)}>Login</button>
-                    <button className="login-register-button" to={'register'}>Create Account</button>
-                    {msg && <InfoBox msg={msg} />}
+                    <button type="submit" className="login-button">Login</button>
+                    <button className="login-register-button" onClick={() => { navigate('../register') }}>Create Account</button>
                 </div>
             </form>
+            {successMsg && <Notifications successMsg={successMsg} />}
+            {errorMsg && <Notifications errorMsg={errorMsg} />}
         </div>
     )
 }
