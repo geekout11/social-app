@@ -1,0 +1,7 @@
+.feed {
+    display: flex;
+}
+
+.feed-wrapper {
+    padding: 20px;
+}
